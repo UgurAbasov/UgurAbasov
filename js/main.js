@@ -5,9 +5,75 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Portfolio website loaded successfully!');
 
+    // Initialize mobile navigation
+    initMobileNav();
+
     // Initialize scroll animations
     initScrollAnimations();
 });
+
+/**
+ * Initialize mobile navigation toggle
+ */
+function initMobileNav() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (!navToggle || !navMenu) return;
+
+    // Toggle menu on hamburger click
+    navToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.contains('active');
+
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    // Close menu when clicking on a nav link
+    const navLinks = navMenu.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
+    });
+
+    // Close menu when clicking outside (on the overlay)
+    document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('active') &&
+            !navMenu.contains(e.target) &&
+            !navToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+
+    function openMenu() {
+        navToggle.classList.add('active');
+        navMenu.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+        // Prevent body scroll when menu is open
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+        // Restore body scroll
+        document.body.style.overflow = '';
+    }
+}
 
 /**
  * Initialize scroll-triggered animations using Intersection Observer

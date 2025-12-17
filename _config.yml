@@ -1,0 +1,11 @@
+title: Ughur Abbasov
+description: Personal website
+url: "https://ugurabasov.github.io"
+baseurl: "/UgurAbasov"
+
+markdown: kramdown
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

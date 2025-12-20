@@ -1,7 +1,8 @@
 title: Ughur Abbasov
 description: Backend Developer and AI Enthusiast
 url: "https://ugurabasov.github.io"
-baseurl: "/UgurAbasov"
+baseurl: "/UgurAbbasov"
+permalink: pretty
 
 # Build settings
 markdown: kramdown
@@ -30,4 +31,3 @@ exclude:
   - .jekyll-cache
   - .sass-cache
   - .github
-  - AI-chat.md

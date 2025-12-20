@@ -1,0 +1,28 @@
+<header class="navbar">
+    <nav class="nav-container">
+        <a href="{{ '/' | relative_url }}" class="nav-logo">Ughur Abbasov</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+                <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ '/about.html' | relative_url }}"
+                    class="nav-link {% if page.url == '/about.html' %}active{% endif %}">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ '/projects.html' | relative_url }}"
+                    class="nav-link {% if page.url == '/projects.html' %}active{% endif %}">Projects</a>
+            </li>
+            <li class="nav-item">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>

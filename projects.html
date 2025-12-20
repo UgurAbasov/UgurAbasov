@@ -1,166 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: default
+title: Projects
+description: Explore my projects and see what I've been working on
+css:
+- /assets/css/projects.css
+---
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore my projects and see what I've been working on">
-    <title>Projects | My Portfolio</title>
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/projects.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+<!-- Page Header -->
+<header class="page-header" data-animate="fade-up">
+    <h1 class="page-title">My Projects</h1>
+    <p class="page-subtitle">A showcase of my work and personal projects</p>
+</header>
 
-<body>
-    <!-- Navigation -->
-    <header class="navbar">
-        <nav class="nav-container">
-            <a href="index.html" class="nav-logo">Ughur Abbasov</a>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="projects.html" class="nav-link active">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                        <i class="fa-solid fa-moon"></i>
+<!-- Projects Grid -->
+<section class="projects-section">
+    <div class="projects-grid">
+        {% for project in site.projects %}
+        <article class="project-card-full" data-animate="fade-up"
+            onclick="window.location.href='{{ project.url | relative_url }}'">
+            <div class="project-card-header">
+                <div class="project-icon-wrapper">
+                    <i class="fa-solid {{ project.icon }}"></i>
+                </div>
+                <div class="project-links">
+                    {% if project.github %}
+                    <a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="project-link"
+                        aria-label="View on GitHub" onclick="event.stopPropagation();">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <h2 class="project-card-name">{{ project.title }}</h2>
+
+            {% if project.images %}
+            <!-- Carousel Section -->
+            <div class="project-carousel" onclick="event.stopPropagation();">
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        {% for image in project.images %}
+                        <div class="carousel-slide {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image | relative_url }}" alt="{{ project.title }} Image {{ forloop.index }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% if project.images.size > 1 %}
+                    <button class="carousel-btn prev" aria-label="Previous Slide">
+                        <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                </li>
-            </ul>
-        </nav>
-    </header>
+                    <button class="carousel-btn next" aria-label="Next Slide">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Page Header -->
-        <header class="page-header" data-animate="fade-up">
-            <h1 class="page-title">My Projects</h1>
-            <p class="page-subtitle">A showcase of my work and personal projects</p>
-        </header>
-
-        <!-- Projects Grid -->
-        <section class="projects-section">
-            <div class="projects-grid">
-                <!-- Project 1: Codersbud -->
-                <article class="project-card-full" data-animate="fade-up">
-                    <div class="project-card-header">
-                        <div class="project-icon-wrapper">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/CodersBudTeam" target="_blank" rel="noopener noreferrer"
-                                class="project-link" aria-label="View on GitHub">
-                                <i class="fa-brands fa-github"></i>
-                            </a>
-                        </div>
+                    <div class="carousel-dots">
+                        {% for image in project.images %}
+                        <span class="dot {% if forloop.first %}active{% endif %}"></span>
+                        {% endfor %}
                     </div>
-                    <h2 class="project-card-name">Codersbud</h2>
-                    <p class="project-card-description">
-                        Led a team of 5 developers to build a comprehensive platform using microservices architecture.
-                        The project features high-performance backend services, real-time functionality, and cloud
-                        deployment.
-                    </p>
-                    <div class="project-tech-stack">
-                        <span class="tech-tag">Golang</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">Redis</span>
-                        <span class="tech-tag">AWS</span>
-                        <span class="tech-tag">Microservices</span>
-                    </div>
-                    <div class="project-highlights">
-                        <div class="highlight-item">
-                            <i class="fa-solid fa-users"></i>
-                            <span>Team of 5</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fa-solid fa-code-branch"></i>
-                            <span>Team Lead</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Project 2: Real-time Chat System -->
-                <article class="project-card-full" data-animate="fade-up" data-animate-delay="1">
-                    <div class="project-card-header">
-                        <div class="project-icon-wrapper">
-                            <i class="fa-solid fa-comments"></i>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/UgurAbasov/chatservice" target="_blank"
-                                rel="noopener noreferrer" class="project-link" aria-label="View on GitHub">
-                                <i class="fa-brands fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <h2 class="project-card-name">Real-time Chat System</h2>
-                    <p class="project-card-description">
-                        A peer-to-peer communication platform built with modern technologies.
-                        Features real-time messaging, WebRTC for video/audio calls, and Redis for session management.
-                    </p>
-                    <div class="project-tech-stack">
-                        <span class="tech-tag">Golang</span>
-                        <span class="tech-tag">Gin</span>
-                        <span class="tech-tag">WebRTC</span>
-                        <span class="tech-tag">Redis</span>
-                        <span class="tech-tag">WebSockets</span>
-                    </div>
-                    <div class="project-highlights">
-                        <div class="highlight-item">
-                            <i class="fa-solid fa-bolt"></i>
-                            <span>Real-time</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fa-solid fa-video"></i>
-                            <span>P2P Video</span>
-                        </div>
-                    </div>
-                </article>
+                    {% endif %}
+                </div>
             </div>
-        </section>
-    </main>
+            {% endif %}
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-social">
-                <a href="https://github.com/UgurAbasov" target="_blank" rel="noopener noreferrer" class="footer-link"
-                    aria-label="GitHub Profile">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="https://www.codecademy.com/profiles/course4256681522" target="_blank" rel="noopener noreferrer"
-                    class="footer-link" aria-label="Codecademy Profile">
-                    <i class="fa-solid fa-code"></i>
-                </a>
+            <p class="project-card-description">
+                {{ project.description }}
+            </p>
+
+            <div class="project-tech-stack">
+                {% for tech in project.tech_stack %}
+                <span class="tech-tag">{{ tech }}</span>
+                {% endfor %}
             </div>
-            <div class="footer-repo">
-                <a href="https://github.com/UgurAbasov/UgurAbasov" target="_blank" rel="noopener noreferrer"
-                    class="footer-repo-link">
-                    <i class="fa-brands fa-github"></i>
-                    View Website Source
-                </a>
+
+            <div class="project-highlights">
+                {% for highlight in project.highlights %}
+                <div class="highlight-item">
+                    <i class="fa-solid {{ highlight.icon }}"></i>
+                    <span>{{ highlight.text }}</span>
+                </div>
+                {% endfor %}
             </div>
-            <p class="footer-copyright">&copy; 2025 Ughur Abbasov. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
-</body>
-
-</html>
+        </article>
+        {% endfor %}
+    </div>
+</section>

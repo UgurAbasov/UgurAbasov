@@ -1,7 +1,7 @@
 title: Ughur Abbasov
 description: Backend Developer and AI Enthusiast
 url: "https://ugurabasov.github.io"
-baseurl: ""
+baseurl: "/UgurAbasov"
 
 # Build settings
 markdown: kramdown
